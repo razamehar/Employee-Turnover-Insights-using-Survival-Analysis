@@ -1,7 +1,7 @@
 # Employee Turnover Insights: Using Survival Analysis
 
 ## Project Overview
-Conducted a detailed analysis of my former organization's employee turnover for the period 1st Jan, 2022 tp 15th March, 2023, examining historical trends, departmental and band-wise attrition, and tenure-related insights. Utilized predictive analytics from the Employee Engagement Survey 2022, gathered firsthand feedback from former employees, and performed bivariate analyses. Recently incorporated Survival Analysis to uncover temporal patterns and predictors. The findings informed strategic decisions for improving employee retention.
+Conducted a detailed analysis of my former organization's employee turnover for the period 1st Jan, 2022 tp 15th March, 2023, examining historical trends, departmental and band-wise attrition, and tenure-related insights. Utilized predictive analytics from the Employee Engagement Survey 2022, gathered firsthand feedback from former employees, and performed bivariate analyses. Recently incorporated Survival Analysis using Kaplan Meier estimator and COX proportional hazards model to uncover temporal patterns and predictors. The findings informed strategic decisions for improving employee retention.
 
 ### Analysis Steps
 1. **Pre-Insights Primer:**
