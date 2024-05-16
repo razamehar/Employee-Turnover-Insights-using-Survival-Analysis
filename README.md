@@ -22,6 +22,11 @@ Conducted a detailed analysis of my former organization's employee turnover for 
 ### Survival Analysis
 Utilizing  Kaplan-Meier estimator and Cox proportional hazards method.
 
+#### Statistical Probability of Employees leaving the Organization
+<div>
+   <img src="docs/Kaplan_Meier_Survival_Curve.png" alt="Statistical Probability of Employee leaving" style="max-width: 100%";>
+</div>
+
 ## Usage
 ### Prerequisites
 - Python 3.10.12
