@@ -11,19 +11,19 @@ Conducted a detailed analysis of my former organization's employee turnover for 
 
 ## Analysis Steps
 1. **Pre-Insights Primer:**
-   - Analyzing natue of attrition and looked at attrition through the years.
+   - Examine the nature of attrition and review attrition trends over the years.
 
 2. **Core Observations:**
-   - Analyzing the attrition with respect to department, band, tenure and reason for turover. Identifying regretable losses.
+   - Analyze attrition with respect to departments, job bands, tenure, and reasons for turnover. Identify regrettable losses.
 
 3. **Predictive Analysis:**
-   - Using the insights from the employee engagement survey to predict the vulnerable groups.
+   - Leverage insights from employee engagement surveys to predict vulnerable groups.
 
 4. **Reconnecting with  Former Employees:**
-   - Finding out the reaons of turnover from the employee who left the organization before the start of this analysis.
+   - Investigate the reasons for turnover from employees who left before the commencement of this analysis.
 
 5. **Bivariate Analysis:**
-   - Identifying the band group and departments at the higest risk of turnover.
+   - Identify job bands and departments with the highest risk of turnover.
 
 ## Survival Analysis
 Utilizing  Kaplan-Meier estimator and Cox proportional hazards method.
