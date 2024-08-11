@@ -34,7 +34,7 @@ These methodologies can help identify **high-risk groups** by analyzing survival
 ## Survival Analysis
 Utilizing  Kaplan-Meier estimator and Cox proportional hazards method.
 
-### Statistical Probability of Employees leaving the Organization
+### Kaplan Meier Survival Curve
 <div>
    <img src="docs/Kaplan_Meier_Survival_Curve.png" alt="Statistical Probability of Employee leaving" style="max-width: 100%";>
 </div>
@@ -42,6 +42,50 @@ Utilizing  Kaplan-Meier estimator and Cox proportional hazards method.
 #### Insights from the Kaplan Meier Survival Curve
 - The group most at risk of leaving consists of employees with 0 to 1 year of tenure.
 - There is over a 90% probability that resignations will come from employees who have been with the company for 0 to 3 years.
+
+### Cox Proportional Hazards Modes
+
+| Covariate         | Coefficient (coef) | exp(coef) | SE(coef) | coef lower 95% | coef upper 95% | exp(coef) lower 95% | exp(coef) upper 95% | z      | p     | -log2(p) |
+|-------------------|---------------------|-----------|----------|----------------|----------------|---------------------|---------------------|--------|-------|----------|
+| **Gender_Male**   | -0.84               | 0.43      | 0.60     | -2.02          | 0.35           | 0.13                | 1.42                | -1.38  | 0.17  | 2.59     |
+| **Grade_Manager** | -1.28               | 0.28      | 0.46     | -2.19          | -0.37          | 0.11                | 0.69                | -2.76  | 0.01  | 7.44     |
+| **Grade_Supervisor** | -3.18             | 0.04      | 0.62     | -4.40          | -1.95          | 0.01                | 0.14                | -5.09  | <0.005| 21.41    |
+| **Grade_Technicians** | -1.11            | 0.33      | 0.26     | -1.62          | -0.59          | 0.20                | 0.55                | -4.24  | <0.005| 15.45    |
+
+**Notes**
+- **exp(coef)**: Exponential of the coefficient, representing the hazard ratio.
+- **SE(coef)**: Standard error of the coefficient.
+- **coef lower 95%** / **coef upper 95%**: 95% Confidence Interval for the coefficient.
+- **exp(coef) lower 95%** / **exp(coef) upper 95%**: 95% Confidence Interval for the hazard ratio.
+- **z**: Z-score for the hypothesis test of the coefficient.
+- **p**: p-value for the hypothesis test of the coefficient.
+- **-log2(p)**: -log2 of the p-value for the coefficient.
+
+#### Insights from the Model
+
+1. **Gender_Male**:
+   - **Coefficient**: -0.84
+   - **Hazard Ratio (exp(coef))**: 0.43
+   - **Interpretation**: Males have a 57% lower hazard of leaving the organization compared to females. The result is not statistically significant (p = 0.17), suggesting that gender does not have a strong impact on the likelihood of leaving.
+
+2. **Grade_Manager**:
+   - **Coefficient**: -1.28
+   - **Hazard Ratio (exp(coef))**: 0.28
+   - **Interpretation**: Managers have a 72% lower hazard of leaving compared to Associates. This result is statistically significant (p = 0.01), indicating that managers are less likely to leave the organization.
+
+3. **Grade_Supervisor**:
+   - **Coefficient**: -3.18
+   - **Hazard Ratio (exp(coef))**: 0.04
+   - **Interpretation**: Supervisors have a 96% lower hazard of leaving compared to Associates. This result is highly significant (p < 0.005), showing that supervisors are far less likely to leave the organization.
+
+4. **Grade_Technicians**:
+   - **Coefficient**: -1.11
+   - **Hazard Ratio (exp(coef))**: 0.33
+   - **Interpretation**: Technicians have a 67% lower hazard of leaving compared to Associates. This result is also statistically significant (p < 0.005), indicating that technicians are less likely to leave.
+
+5. **Associate**:
+   - **Interpretation**: Associates are the reference group in this model. Therefore, all other roles (Managers, Supervisors, Technicians) are compared to Associates in terms of their likelihood of leaving.
+   - **Summary**: Associates have a higher likelihood of leaving compared to other roles.
 
 ## Conclusion
 By anonymizing the data and combining traditional approaches to employee attrition with advanced statistical methods, such as Survival Analysis and predictive analytics, I hope to encourage more HR practitioners to incorporate statistical analysis and machine learning into their retention strategies. This approach can provide deeper, data-driven insights and foster more effective solutions for reducing turnover and improving workplace environments.
