@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from lifelines import KaplanMeierFitter, CoxPHFitter
 
-data = pd.read_csv("Manning_April_2023.csv")
+data = pd.read_csv("Manning.csv")
 
-data.set_index("Person ID", inplace=True)
+#data.set_index("Person ID", inplace=True)
 
 print("The initial rows of the data are:\n", data.head())
 print(data.shape)
@@ -35,7 +35,7 @@ kp.plot_survival_function(linewidth=2, figsize=(12, 6))
 plt.xlabel("Time (months)")
 plt.xticks(np.arange(0, max(data["Survival Time"]), 30))
 plt.ylabel("Survival Probability")
-plt.show()
+#plt.show()
 
 tenure_3 = data[data["Survival Time"] < 36]
 tenure_5 = data[(data["Survival Time"] >= 36) & (data["Survival Time"] < 60)]
@@ -56,7 +56,7 @@ ax1.set_xlabel("Time (months)")
 ax2.set_xlabel("Time (months)")
 ax3.set_xlabel("Time (months)")
 ax4.set_xlabel("Time (months)")
-plt.show()
+#plt.show()
 
 ax = plt.axes()
 kp.fit(durations=tenure_3["Survival Time"], event_observed=tenure_3["Left"], label="0 - 3")
@@ -70,7 +70,7 @@ kp.plot_survival_function(linewidth=2, figsize=(12, 6), ax=ax)
 plt.xlabel("Time (months)")
 plt.xticks(np.arange(0, max(data["Survival Time"]), 30))
 plt.ylabel("Survival Probability")
-plt.show()
+#plt.show()
 
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(12, 8), sharey=True, gridspec_kw={'hspace': 0.5})
 m1_m2.groupby("Left")["Survival Time"].plot(kind="hist", ax=ax1, title="M1-M2")
@@ -81,7 +81,7 @@ plt.xticks(np.arange(0, max(data["Survival Time"]), 30))
 ax1.legend(labels=["Not churned", "Churned"])
 ax1.set_xlabel("Time (months)")
 ax2.set_xlabel("Time (months)")
-plt.show()
+#plt.show()
 
 ax = plt.axes()
 kp.fit(durations=m1_m2["Survival Time"], event_observed=m1_m2["Left"], label="M1-M2")
@@ -95,29 +95,39 @@ kp.plot_survival_function(linewidth=2, figsize=(12, 6), ax=ax)
 plt.xlabel("Time (months)")
 plt.xticks(np.arange(0, max(data["Survival Time"]), 30))
 plt.ylabel("Survival Probability")
-plt.show()
+#plt.show()
 
-conditions = [
-    (data["Band"].isin(["M1", "M2"])),
-    (data["Band"].isin(["M3"])),
-    (data["Band"].isin(["M4"])),
-    (data["Band"].isin(["P3", "P4", "P5"])),
-    (data["Band"].isin(["P6", "P7", "T3"]))
-]
+categorical_columns = ['Gender', 'Grade']
+non_categorical_columns = ['Survival Time', 'Left']
 
-choices = ["M1-M2", "M3", "M4", "P3-P5", "P6-T3"]
+# Create a DataFrame with just categorical columns
+data_categorical = data[categorical_columns]
 
-data["Band_Category"] = np.select(conditions, choices, default='Other')
-columns = data[["Band_Category", "Department", "Left"]]
-encoded_data = pd.get_dummies(columns, drop_first=True)
-encoded_data["Survival Time"] = data["Survival Time"]
+# Create a DataFrame with the remaining columns
+data_non_categorical = data[non_categorical_columns]
 
-cpf = CoxPHFitter()
-cpf.fit(encoded_data, duration_col="Survival Time", event_col="Left")
-cpf.print_summary(style="ascii")
+# Perform one-hot encoding on categorical columns
+data_categorical_encoded = pd.get_dummies(data_categorical, drop_first=True)
 
-'''cpf.plot_partial_effects_on_outcome("Gender_Male", [1, 0], plot_baseline=False)
-plt.show()'''
+# Check the result
+print(data_categorical_encoded.head())
+
+# Concatenate the encoded categorical columns with the non-categorical columns
+data_encoded = pd.concat([data_non_categorical, data_categorical_encoded], axis=1)
+
+# Check the result
+print(data_encoded.head())
+
+# Initialize the Cox Proportional Hazards model
+cph = CoxPHFitter()
+
+# Fit the model with the encoded data
+cph.fit(data_encoded, duration_col='Survival Time', event_col='Left')
+
+# Print the summary of the model
+cph.print_summary()
+
+
 
 data1 = data[data["Left"] == 1]
 fig, (ax1, ax2) = plt.subplots(nrows=2, ncols=1, figsize=(14, 8))
@@ -131,6 +141,7 @@ ax2.set_title("Tenure Distribution by Department for Employees Who Have Left")
 plt.xticks(rotation=45)
 plt.ylabel("")
 plt.tight_layout()
-plt.show()
+#plt.show()
+
 
 
