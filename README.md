@@ -39,6 +39,10 @@ Utilizing  Kaplan-Meier estimator and Cox proportional hazards method.
    <img src="docs/Kaplan_Meier_Survival_Curve.png" alt="Statistical Probability of Employee leaving" style="max-width: 100%";>
 </div>
 
+#### Insights from the Kaplan Meier Survival Curve
+- The group most at risk of leaving consists of employees with 0 to 1 year of tenure.
+- There is over a 90% probability that resignations will come from employees who have been with the company for 0 to 3 years.
+
 ## Conclusion
 By anonymizing the data and combining traditional approaches to employee attrition with advanced statistical methods, such as Survival Analysis and predictive analytics, I hope to encourage more HR practitioners to incorporate statistical analysis and machine learning into their retention strategies. This approach can provide deeper, data-driven insights and foster more effective solutions for reducing turnover and improving workplace environments.
 
